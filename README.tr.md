@@ -6,6 +6,8 @@
 
 PyBullet fizik simülasyonunda REINFORCE (Monte Carlo Politika Gradyanı) algoritması ile eğitilmiş; 3B ortamda engellerden ve düşman ajanlardan kaçarak sıralı hedeflere ulaşan otonom bir insansız hava aracı.
 
+> 🥉 **Fakülte 3.'sü** — Fırat Üniversitesi Mühendislik Fakültesi, Bitirme Projesi Yarışması 2026
+
 ---
 
 ## Demo

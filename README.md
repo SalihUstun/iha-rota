@@ -6,6 +6,8 @@
 
 REINFORCE (Monte Carlo Policy Gradient) algorithm trained in PyBullet physics simulation to navigate a 3D environment, evade enemy agents, and reach sequential targets.
 
+> 🥉 **3rd Place** — Fırat University Faculty of Engineering, Graduation Project Competition 2026
+
 ---
 
 ## Demo
