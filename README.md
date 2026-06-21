@@ -1,3 +1,7 @@
+<p align="right">
+  🇺🇸 English &nbsp;|&nbsp; <a href="README.tr.md">🇹🇷 Türkçe</a>
+</p>
+
 # IHA Rota — 3D Autonomous UAV Navigation with Reinforcement Learning
 
 REINFORCE (Monte Carlo Policy Gradient) algorithm trained in PyBullet physics simulation to navigate a 3D environment, evade enemy agents, and reach sequential targets.
