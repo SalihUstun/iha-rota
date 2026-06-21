@@ -1,12 +1,12 @@
 <p align="right">
-  🇺🇸 English &nbsp;|&nbsp; <a href="README.tr.md">🇹🇷 Türkçe</a>
+  🇹🇷 Türkçe &nbsp;|&nbsp; <a href="README.en.md">🇺🇸 English</a>
 </p>
 
-# IHA Rota — 3D Autonomous UAV Navigation with Reinforcement Learning
+# IHA Rota — Pekiştirmeli Öğrenme ile 3B Otonom İHA Navigasyonu
 
-REINFORCE (Monte Carlo Policy Gradient) algorithm trained in PyBullet physics simulation to navigate a 3D environment, evade enemy agents, and reach sequential targets.
+PyBullet fizik simülasyonunda REINFORCE (Monte Carlo Politika Gradyanı) algoritması ile eğitilmiş; 3B ortamda engellerden ve düşman ajanlardan kaçarak sıralı hedeflere ulaşan otonom bir insansız hava aracı.
 
-> 🥉 **3rd Place** — Fırat University Faculty of Engineering, Graduation Project Competition 2026
+> 🥉 **Fakülte 3.'sü** — Fırat Üniversitesi Mühendislik Fakültesi, Bitirme Projesi Yarışması 2026
 
 ---
 
@@ -14,59 +14,59 @@ REINFORCE (Monte Carlo Policy Gradient) algorithm trained in PyBullet physics si
 
 ![Simülasyon Ortamı](assets/simulation.png)
 
-20×20 meter 3D arena with:
-- 10 randomly placed **obstacles** (boxes + cylinders)
-- 2 **enemy agents** (active pursuit)
-- 3 **sequential targets** (must be reached in order)
-- 16-ray **LiDAR** sensor
+20×20 metrelik 3B arena:
+- Rastgele konumlandırılmış 10 **engel** (kutu + silindir)
+- Aktif takip yapan 2 **düşman ajan**
+- Sırayla ulaşılması gereken 3 **hedef**
+- 16 ışınlı **LiDAR** sensörü
 
 ---
 
-## Results
+## Sonuçlar
 
-### Training Records (v1 → v6)
+### Eğitim Rekorları (v1 → v6)
 
-![Training Records](assets/training_records.png)
+![Eğitim Rekorları](assets/training_records.png)
 
-### Success Rate Comparison
+### Başarı Oranı Karşılaştırması
 
-![Success Rate](assets/success_rates.png)
+![Başarı Oranı](assets/success_rates.png)
 
-### Final Model (v6) — 100,000 Episode Test
+### Final Model (v6) — 100.000 Görev Testi
 
-| Metric | Value |
+| Metrik | Değer |
 |---|---|
-| Average Reward | 1834.09 |
-| Max Reward | 2298.95 |
-| Best Training Score | +1826.63 |
-| **Success Rate** | **98.1%** |
-| Timeout Rate | 1.9% |
-| Total Episodes Evaluated | 100,000 |
+| Ortalama Ödül | 1834,09 |
+| Maksimum Ödül | 2298,95 |
+| Eğitim Rekoru | +1826,63 |
+| **Başarı Oranı** | **%98,1** |
+| Zaman Aşımı | %1,9 |
+| Toplam Test Görevi | 100.000 |
 
-The v6 model was trained for ~13,700 episodes on top of v5, reaching a new all-time best of **+1826.63** at episode 8,300, then plateaued. Two further attempts (v7 with lower learning rates) failed to surpass this score, confirming v6 as the final model.
+v6 modeli, v5 üzerinden ~13.700 sorti daha eğitilerek sorti 8.300'de **+1826,63** tüm zamanların rekoruna ulaştı ve ardından platoya girdi. İki ayrı v7 denemesi (daha düşük öğrenme hızlarıyla) bu rekoru geçemedi; v6 final model olarak benimsendi.
 
-### Reward Distribution (100K episodes)
+### Ödül Dağılımı (100K görev)
 
-![Test Distribution](assets/test_distribution.png)
+![Test Dağılımı](assets/test_distribution.png)
 
-### Example Navigation Path
+### Örnek Navigasyon Yolu
 
-![Navigation Path](assets/navigation_path.png)
-
----
-
-## Policy Network Architecture
-
-![Policy Network](assets/policy_network.png)
-
-- **Input:** 28-dim (drone pos/vel, relative target vector, relative enemy vector, 16× LiDAR)
-- **Hidden layers:** 256 → 256 (ReLU)
-- **Output:** 9 discrete actions (Softmax)
-- **Total parameters:** ~75,500
+![Navigasyon Yolu](assets/navigation_path.png)
 
 ---
 
-## Installation
+## Politika Ağı Mimarisi
+
+![Politika Ağı](assets/policy_network.png)
+
+- **Girdi:** 28 boyut (drone konum/hız, göreceli hedef vektörü, göreceli düşman vektörü, 16× LiDAR)
+- **Gizli katmanlar:** 256 → 256 (ReLU)
+- **Çıktı:** 9 ayrık hareket yönü (Softmax)
+- **Toplam parametre:** ~75.500
+
+---
+
+## Kurulum
 
 ```bash
 conda create -n iha_env python=3.10
@@ -76,92 +76,92 @@ pip install pybullet gymnasium torch numpy matplotlib
 
 ---
 
-## Usage
+## Kullanım
 
-### Train
+### Eğitim
 
 ```bash
 python train.py
 ```
 
-Version management is done via `VERSION` and `BASE_VERSION` in `config.py`.  
-Model is saved to `sonuc/vX_iha_beyni.pth` when a new best score is reached.
+Versiyon yönetimi `config.py` içindeki `VERSION` ve `BASE_VERSION` değişkenleriyle yapılır.  
+Yeni rekor kırıldığında model `sonuc/vX_iha_beyni.pth` olarak kaydedilir.
 
-### Test (visual, 5 episodes)
+### Test (görsel, 5 sorti)
 
 ```bash
 python test.py
 ```
 
-### Long test (100 episodes, with stats)
+### Uzun test (100 sorti, istatistikli)
 
 ```bash
 python uzun_test.py
 ```
 
-### Stress test (30 obstacles, hard scenario)
+### Stres testi (30 engel, zorlu senaryo)
 
 ```bash
 python test_zor.py
 ```
 
-### Train on Kaggle
+### Kaggle'da Eğitim
 
-Open `kaggle_train.ipynb` as a Kaggle notebook. CPU mode is recommended (faster than GPU for this setup).
+`kaggle_train.ipynb` dosyasını Kaggle notebook olarak çalıştırın. Bu kurulum için GPU'dan CPU modu daha hızlı çalışmaktadır.
 
 ---
 
-## Project Structure
+## Dosya Yapısı
 
 ```
 iha_rota/
-├── config.py              # All hyperparameters and environment settings
-├── train.py               # REINFORCE training loop
-├── test.py                # 5-episode visual test
-├── uzun_test.py           # 100-episode long test + statistics
-├── test_zor.py            # 30-obstacle stress test
-├── kaggle_train.ipynb     # Kaggle training notebook
+├── config.py              # Tüm hiperparametreler ve ortam ayarları
+├── train.py               # REINFORCE eğitim döngüsü
+├── test.py                # 5 sortili görsel test
+├── uzun_test.py           # 100 sortili uzun test + istatistik
+├── test_zor.py            # 30 engelli stres testi
+├── kaggle_train.ipynb     # Kaggle eğitim notebook'u
 ├── env/
-│   ├── iha_env.py         # Main Gymnasium environment
-│   ├── obstacles.py       # Obstacle placement
-│   ├── enemies.py         # Enemy agent behavior
-│   └── boundary_walls.py  # Arena boundary walls
+│   ├── iha_env.py         # Ana Gymnasium ortamı
+│   ├── obstacles.py       # Engel yerleşimi
+│   ├── enemies.py         # Düşman ajan davranışı
+│   └── boundary_walls.py  # Arena sınır duvarları
 ├── network/
-│   └── policy.py          # IhaPolicy network (28→256→256→9)
+│   └── policy.py          # IhaPolicy ağı (28→256→256→9)
 ├── visualization/
-│   └── viz_2d.py          # Real-time 2D top-down visualization
-├── sonuc/                 # Trained models (v1–v6)
-└── assets/                # README figures
+│   └── viz_2d.py          # Gerçek zamanlı 2B kuş bakışı görselleştirme
+├── sonuc/                 # Eğitilmiş modeller (v1–v6)
+└── assets/                # README görselleri
 ```
 
 ---
 
-## Algorithm
+## Algoritma
 
-**REINFORCE** (Williams, 1992) — Monte Carlo Policy Gradient
+**REINFORCE** (Williams, 1992) — Monte Carlo Politika Gradyanı
 
-- Full return computed at end of each episode (γ = 0.99)
-- Normalized returns with baseline for variance reduction
-- Entropy bonus for exploration (v1–v5: 0.05, v6: 0.02)
+- Her bölüm sonunda tam geri dönüş hesabı (γ = 0,99)
+- Varyans azaltma için normalize edilmiş getiri
+- Keşif teşviki için entropi bonusu (v1–v5: 0,05, v6: 0,02)
 
 ---
 
-## Training History
+## Eğitim Geçmişi
 
-| Version | Base | Learning Rate | Entropy | Best Score |
+| Versiyon | Baz | Öğrenme Hızı | Entropi | Rekor |
 |---|---|---|---|---|
-| v1 | scratch | 2×10⁻⁴ | 0.05 | +1018.20 |
-| v2 | v1 | 2×10⁻⁴ | 0.05 | +1167.07 |
-| v3 | v2 | 2×10⁻⁴ | 0.05 | +1292.85 |
-| v4 | v3 | 2×10⁻⁴ | 0.05 | +1437.40 |
-| v5 | v4 | 2×10⁻⁴ | 0.05 | +1446.22 |
-| **v6** | v5 | **1×10⁻⁴** | **0.02** | **+1826.63** ✓ |
+| v1 | sıfırdan | 2×10⁻⁴ | 0,05 | +1018,20 |
+| v2 | v1 | 2×10⁻⁴ | 0,05 | +1167,07 |
+| v3 | v2 | 2×10⁻⁴ | 0,05 | +1292,85 |
+| v4 | v3 | 2×10⁻⁴ | 0,05 | +1437,40 |
+| v5 | v4 | 2×10⁻⁴ | 0,05 | +1446,22 |
+| **v6** | v5 | **1×10⁻⁴** | **0,02** | **+1826,63** ✓ |
 
-~65,000 total episodes trained on Kaggle (CPU).
+Kaggle CPU ortamında toplam ~65.000 sorti.
 
 ---
 
-## Requirements
+## Gereksinimler
 
 - Python 3.10
 - PyTorch ≥ 1.13
@@ -171,6 +171,6 @@ iha_rota/
 
 ---
 
-## License
+## Lisans
 
 [MIT](LICENSE)
